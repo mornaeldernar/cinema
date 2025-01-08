@@ -1,27 +1,21 @@
-import Cabecera from "componentes/Cabecera"
-import Container from "componentes/Container"
-import Pie from "componentes/Pie"
-import FavoritoProvider from "context/Favoritos"
 import Favoritos from "pages/Favoritos"
 import Inicio from "pages/Inicio"
+import Layout from "pages/Layout"
+import NotFound from "pages/NotFound"
 import Player from "pages/Player"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
-            <Cabecera />
-            <Container>
-                <FavoritoProvider>
-                    <Routes>
-                        <Route path="/" element={<Inicio />}></Route>
-                        <Route index element={<Inicio />}></Route>
-                        <Route path="/favoritos" element={<Favoritos />}></Route>
-                        <Route path=":id" element={<Player />}></Route>
-                    </Routes>
-                </FavoritoProvider>
-            </Container>
-            <Pie />
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Inicio />}></Route>
+                    <Route path="favoritos" element={<Favoritos />}></Route>
+                    <Route path="videos/:id" element={<Player />}></Route>
+                    <Route path="*" element={<NotFound />}></Route>
+                </Route>
+            </Routes>
         </BrowserRouter>
     )
 }
